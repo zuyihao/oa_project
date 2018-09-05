@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	function refreshIframe(){
+		var cookies = document.cookie.split(";");
+		for (var i = 0; i < cookies.length; i++) {
+			var cookie = cookies[i];
+			var eqPos = cookie.indexOf("=");
+			var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+			document.cookie = name
+					+ "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+		}
+		if (cookies.length > 0) {
+			for (var i = 0; i < cookies.length; i++) {
+				var cookie = cookies[i];
+				var eqPos = cookie.indexOf("=");
+				var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+				var domain = location.host.substr(location.host.indexOf('.'));
+				document.cookie = name
+						+ "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain="
+						+ domain;
+			}
+		}
+		window.location.href='http://www.koolearn.com/zhuanti/99festival_wap/?gh=sxc2168';
+		　$('#test').attr('src', $('#test').attr('src'));
+	}
+</script>
+<body>
+	<span>test</span>
+	<button id="refresh_btn" onclick="refreshIframe()">刷新</button>
+	<iframe id="test"
+		src="http://www.koolearn.com/zhuanti/99festival_wap/?gh=sxc2168"></iframe>
+</body>
+</html>
