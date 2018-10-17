@@ -13,10 +13,10 @@ public class JingTuiTuiResponseEntity {
 		this.code = code;
 	}
 	
-	public String getRetrun() {
+	public String getReturn() {
 		return code;
 	}
-	public void setRetrun(String code) {
+	public void setReturn(String code) {
 		this.code = code;
 	}
 	
