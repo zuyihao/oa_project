@@ -58,19 +58,23 @@ public class JingTuiTuiServiceImpl implements JingTuiTuiService {
 
 	public void loginJingTuiTui() throws Exception {
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("X-Auth-Token", UUID.randomUUID().toString());
+		//headers.add("X-Auth-Token", UUID.randomUUID().toString());
+		//headers.setAccept(MediaType.);
 		MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
-		postParameters.add("id", "1111");
+		postParameters.add("id", "468");
 		postParameters.add("username", "11111");
-		postParameters.add("password", "1111111");
+		postParameters.add("password", "111111");
 		HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(
 				postParameters, headers);
-		String response = template.postForObject("http://www.jingdongdaili.com/relogin/",
-				JSON.toJSONString(requestEntity), String.class);
-		System.out.println(response);
-		JingTuiTuiResponseEntity result = JSON.parseObject(response, JingTuiTuiResponseEntity.class);
-		System.out.println(result.getResult());
-		System.out.println(result.getReturn());
+		//String response = template.postForObject("http://www.jingdongdaili.com/relogin/",JSON.toJSONString(requestEntity), String.class);
+		//System.out.println(response);
+		//JingTuiTuiResponseEntity result = JSON.parseObject(response, JingTuiTuiResponseEntity.class);
+		//System.out.println(result.getResult());
+		//System.out.println(result.getReturn());
+		String requesetString = "id=468&username=1111&password=111";
+		ResponseEntity<String> response = template.postForEntity("http://www.jingdongdaili.com/relogin/", requesetString, String.class);
+		System.out.println("result body" + response.getHeaders());
+		System.out.println("result body" + response.getBody());
 	}
 
 	public void getGoods() throws Exception {
