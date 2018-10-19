@@ -1,8 +1,10 @@
 package com.lin.server.service;
 
+import java.util.Map;
+
 public interface JingTuiTuiService {
 	
-	public void loginJingTuiTui() throws Exception;
+	public Map<String,String> loginJingTuiTui() throws Exception;
 	
 	public void getGoods() throws Exception;
 	

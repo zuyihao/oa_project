@@ -3,8 +3,12 @@ package com.lin.server.service;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.UUID;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-
-import com.alibaba.fastjson.JSON;
-import com.lin.model.JingTuiTuiResponseEntity;
 
 @Service("jingTuiTuiService")
 public class JingTuiTuiServiceImpl implements JingTuiTuiService {
@@ -56,30 +57,32 @@ public class JingTuiTuiServiceImpl implements JingTuiTuiService {
 		System.out.println(cookieVal);
 	}
 
-	public void loginJingTuiTui() throws Exception {
+	public Map<String,String> loginJingTuiTui() throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		//headers.add("X-Auth-Token", UUID.randomUUID().toString());
 		//headers.setAccept(MediaType.);
 		MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
 		postParameters.add("id", "468");
-		postParameters.add("username", "11111");
-		postParameters.add("password", "111111");
+		postParameters.add("username", "1111");
+		postParameters.add("password", "11111");
 		HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(
 				postParameters, headers);
-		//String response = template.postForObject("http://www.jingdongdaili.com/relogin/",JSON.toJSONString(requestEntity), String.class);
-		//System.out.println(response);
-		//JingTuiTuiResponseEntity result = JSON.parseObject(response, JingTuiTuiResponseEntity.class);
-		//System.out.println(result.getResult());
-		//System.out.println(result.getReturn());
-		String requesetString = "id=468&username=1111&password=111";
-		ResponseEntity<String> response = template.postForEntity("http://www.jingdongdaili.com/relogin/", requesetString, String.class);
+//		String response = template.postForObject("http://www.jingdongdaili.com/relogin/",requestEntity, String.class);
+//		System.out.println(response);
+//		JingTuiTuiResponseEntity result = JSON.parseObject(response, JingTuiTuiResponseEntity.class);
+//		System.out.println(result.getResult());
+//		System.out.println(result.getReturn());
+		ResponseEntity<String> response = template.postForEntity("http://www.jingdongdaili.com/relogin/", requestEntity, String.class);
 		System.out.println("result body" + response.getHeaders());
 		System.out.println("result body" + response.getBody());
+		Map<String,String> cookies = new HashMap<String,String>();
+		//token=56168e9883c117523c7eb5e6b3308c18; expires=Fri, 26-Oct-2018 14:34:40 GMT; Max-Age=604800; path=/, agent_site_id=468
+		
+		return cookies;
 	}
 
 	public void getGoods() throws Exception {
-		ResponseEntity<String> re = template.getForEntity("http://www.jingdongdaili.com/create?cateid=sift",
-				String.class, "");
+		ResponseEntity<String> re = template.getForEntity("http://www.jingdongdaili.com/create?cateid=sift",String.class, "");
 		System.out.println(re.getStatusCode());
 		System.out.println(re.getBody());
 	}
@@ -89,5 +92,22 @@ public class JingTuiTuiServiceImpl implements JingTuiTuiService {
 				"");
 		System.out.println(re.getStatusCode());
 		System.out.println(re.getBody());
+	}
+	
+	
+	/**************************jsoup*******************/
+	public String getAll(Map<String, String> cookies) throws Exception {
+		
+		Connection.Response res = Jsoup.connect("http://www.jingdongdaili.com/create?cateid=sift").cookies(cookies)
+				.method(Connection.Method.POST).timeout(10000).execute();// 设置请求的时间(这里设置的请求时间是10秒)
+		Document doc = res.parse();
+		return doc.html();
+
+	}
+	public String search(Map<String, String> cookies,String key) throws Exception {
+		Connection.Response res = Jsoup.connect("http://www.jingdongdaili.com/create?kw=" + key).cookies(cookies)
+				.method(Connection.Method.POST).timeout(10000).execute();// 设置请求的时间(这里设置的请求时间是10秒)
+		Document doc = res.parse();
+		return doc.html();
 	}
 }
