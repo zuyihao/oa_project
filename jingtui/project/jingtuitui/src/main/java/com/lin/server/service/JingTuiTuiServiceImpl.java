@@ -60,7 +60,6 @@ public class JingTuiTuiServiceImpl implements JingTuiTuiService {
 	public Map<String,String> loginJingTuiTui() throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		//headers.add("X-Auth-Token", UUID.randomUUID().toString());
-		//headers.setAccept(MediaType.);
 		MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
 		postParameters.add("id", "468");
 		postParameters.add("username", "1111");
