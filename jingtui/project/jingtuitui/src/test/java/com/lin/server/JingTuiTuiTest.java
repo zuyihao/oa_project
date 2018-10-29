@@ -18,7 +18,7 @@ public class JingTuiTuiTest{
 		ApplicationContext ac=new ClassPathXmlApplicationContext("\\applicationContext.xml");
 		JingTuiTuiService jingTuiTuiService = (JingTuiTuiService) ac.getBean("jingTuiTuiService");
 		try {
-			jingTuiTuiService.loginJingTuiTui();
+			System.out.println(jingTuiTuiService.loginJingTuiTui());
 			//jingTuiTuiService.test();
 		} catch (Exception e) {
 			e.printStackTrace();
