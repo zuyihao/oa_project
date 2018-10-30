@@ -29,17 +29,17 @@ public class JingTuiTuiServiceImpl implements JingTuiTuiService {
 	private final Logger logger = LoggerFactory.getLogger(JingTuiTuiServiceImpl.class);
 
 	@Autowired
-	private RestTemplate template;
+	private RestTemplate restTemplate;
 
 	public Map<String,String> loginJingTuiTui() throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
 		postParameters.add("id", "468");
-		postParameters.add("username", "111111");
-		postParameters.add("password", "111111");
+		postParameters.add("username", "haoooo");
+		postParameters.add("password", "hao123lin");
 		HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(
 				postParameters, headers);
-		ResponseEntity<String> response = template.postForEntity("http://www.jingdongdaili.com/relogin/", requestEntity, String.class);
+		ResponseEntity<String> response = restTemplate.postForEntity("http://www.jingdongdaili.com/relogin/", requestEntity, String.class);
 		//logger.info("result headers:"+ response.getHeaders().getFirst("Set-Cookie"));
 		//logger.info("result body:"+ response.getBody());
 		JingTuiTuiResponseEntity res = JSON.parseObject(response.getBody(),JingTuiTuiResponseEntity.class);

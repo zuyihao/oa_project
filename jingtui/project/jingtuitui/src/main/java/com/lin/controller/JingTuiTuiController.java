@@ -31,6 +31,7 @@ public class JingTuiTuiController {
 	@RequestMapping("search")
     @ResponseBody
 	public ResponseEntity<String> greeting(@RequestParam(name = "searchKey", required = false, defaultValue = "") String searchKey) {
+		logger.info("search goods");
 		ResponseEntity<String> result = new ResponseEntity<String>();
 		try {
 			if(jingTuiTuiCookies == null) {
