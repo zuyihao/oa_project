@@ -35,8 +35,8 @@ public class JingTuiTuiServiceImpl implements JingTuiTuiService {
 		HttpHeaders headers = new HttpHeaders();
 		MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
 		postParameters.add("id", "468");
-		postParameters.add("username", "haoooo");
-		postParameters.add("password", "hao123lin");
+		postParameters.add("username", "fff");
+		postParameters.add("password", "111");
 		HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(
 				postParameters, headers);
 		ResponseEntity<String> response = restTemplate.postForEntity("http://www.jingdongdaili.com/relogin/", requestEntity, String.class);
