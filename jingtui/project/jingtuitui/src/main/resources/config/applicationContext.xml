@@ -39,7 +39,7 @@
 				<bean class="org.apache.http.message.BasicHeader">
 					<constructor-arg value="User-Agent" />
 					<constructor-arg
-						value="Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.16 Safari/537.36" />
+						value="Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36" />
 				</bean>
 				<bean class="org.apache.http.message.BasicHeader">
 					<constructor-arg value="Accept-Encoding" />

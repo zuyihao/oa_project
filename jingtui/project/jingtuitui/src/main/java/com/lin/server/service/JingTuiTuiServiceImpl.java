@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -20,6 +21,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.lin.model.JingTuiTuiResponseEntity;
 
@@ -33,27 +35,29 @@ public class JingTuiTuiServiceImpl implements JingTuiTuiService {
 
 	public Map<String,String> loginJingTuiTui() throws Exception {
 		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Lists.newArrayList(MediaType.APPLICATION_JSON));
+		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 		MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
 		postParameters.add("id", "468");
 		postParameters.add("username", "fff");
 		postParameters.add("password", "111");
 		HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(
 				postParameters, headers);
-		ResponseEntity<String> response = restTemplate.postForEntity("http://www.jingdongdaili.com/relogin/", requestEntity, String.class);
+		restTemplate.postForEntity("http://www.jingdongdaili.com/relogin/", requestEntity, String.class);
 		//logger.info("result headers:"+ response.getHeaders().getFirst("Set-Cookie"));
 		//logger.info("result body:"+ response.getBody());
-		JingTuiTuiResponseEntity res = JSON.parseObject(response.getBody(),JingTuiTuiResponseEntity.class);
-		if("0".equals(res.getResult())) {
+//		JingTuiTuiResponseEntity res = JSON.parseObject(response.getBody(),JingTuiTuiResponseEntity.class);
+//		if("0".equals(res.getResult())) {
 			Map<String,String> cookies = new HashMap<String,String>();
-			try {
-				cookies=getCookies(response.getHeaders().toString());
-			} catch (Exception e) {
-				logger.error("format cookies failed",e);
-			}
+//			try {
+//				cookies=getCookies(response.getHeaders().toString());
+//			} catch (Exception e) {
+//				logger.error("format cookies failed",e);
+//			}
 			return cookies;
-		}else {
-			throw new Exception("login jingtuitui failed:"+response.getBody());
-		}
+//		}else {
+//			throw new Exception("login jingtuitui failed:"+response.getBody());
+//		}
 		
 	}
 
