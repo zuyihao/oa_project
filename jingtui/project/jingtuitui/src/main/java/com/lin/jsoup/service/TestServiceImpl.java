@@ -11,7 +11,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +18,11 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import com.lin.server.service.JingTuiTuiServiceImpl;
-
 public class TestServiceImpl {
-	private final Logger logger = LoggerFactory.getLogger(JingTuiTuiServiceImpl.class);
+	
+	private final Logger logger = LoggerFactory.getLogger(TestServiceImpl.class);
 
-	@Autowired
+	
 	private RestTemplate template;
 
 	public void test()  throws Exception {

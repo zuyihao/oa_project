@@ -30,8 +30,7 @@ public class JingTuiTuiServiceImpl implements JingTuiTuiService {
 
 	private final Logger logger = LoggerFactory.getLogger(JingTuiTuiServiceImpl.class);
 
-	@Autowired
-	private RestTemplate restTemplate;
+	private RestTemplate restTemplate = new RestTemplate();
 
 	public Map<String,String> loginJingTuiTui() throws Exception {
 		HttpHeaders headers = new HttpHeaders();
@@ -39,38 +38,38 @@ public class JingTuiTuiServiceImpl implements JingTuiTuiService {
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 		MultiValueMap<String, String> postParameters = new LinkedMultiValueMap<String, String>();
 		postParameters.add("id", "468");
-		postParameters.add("username", "fff");
-		postParameters.add("password", "111");
+		postParameters.add("username", "gggg");
+		postParameters.add("password", "ffff");
 		HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(
 				postParameters, headers);
-		restTemplate.postForEntity("http://www.jingdongdaili.com/relogin/", requestEntity, String.class);
-		//logger.info("result headers:"+ response.getHeaders().getFirst("Set-Cookie"));
-		//logger.info("result body:"+ response.getBody());
-//		JingTuiTuiResponseEntity res = JSON.parseObject(response.getBody(),JingTuiTuiResponseEntity.class);
-//		if("0".equals(res.getResult())) {
+		ResponseEntity<String> response = restTemplate.postForEntity("http://www.jingdongdaili.com/relogin/", requestEntity, String.class);
+		logger.info("result headers:"+ response.getHeaders().getFirst("Set-Cookie"));
+		logger.info("result body:"+ response.getBody());
+		JingTuiTuiResponseEntity res = JSON.parseObject(response.getBody(),JingTuiTuiResponseEntity.class);
+		if("0".equals(res.getCode())) {
 			Map<String,String> cookies = new HashMap<String,String>();
-//			try {
-//				cookies=getCookies(response.getHeaders().toString());
-//			} catch (Exception e) {
-//				logger.error("format cookies failed",e);
-//			}
+			try {
+				cookies=getCookies(response.getHeaders().toString());
+			} catch (Exception e) {
+				logger.error("format cookies failed",e);
+			}
 			return cookies;
-//		}else {
-//			throw new Exception("login jingtuitui failed:"+response.getBody());
-//		}
+		}else {
+			throw new Exception("login jingtuitui failed:"+response.getBody());
+		}
 		
 	}
 
 	public String getGoods(Map<String, String> cookies) throws Exception {
 		Connection.Response res = Jsoup.connect("http://www.jingdongdaili.com/create?cateid=sift").cookies(cookies)
-				.method(Connection.Method.POST).timeout(10000).execute();// ÉèÖÃÇëÇóµÄÊ±¼ä(ÕâÀïÉèÖÃµÄÇëÇóÊ±¼äÊÇ10Ãë)
+				.method(Connection.Method.POST).timeout(10000).execute();
 		Document doc = res.parse();
 		return doc.html();
 	}
 
 	public String searchGoods(Map<String, String> cookies,String key) throws Exception {
 		Connection.Response res = Jsoup.connect("http://www.jingdongdaili.com/create?kw=" + key).cookies(cookies)
-				.method(Connection.Method.POST).timeout(10000).execute();// ÉèÖÃÇëÇóµÄÊ±¼ä(ÕâÀïÉèÖÃµÄÇëÇóÊ±¼äÊÇ10Ãë)
+				.method(Connection.Method.POST).timeout(10000).execute();// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½10ï¿½ï¿½)
 		Document doc = res.parse();
 		return doc.html();
 	}

@@ -1,36 +1,19 @@
 package com.lin.base.service;
 
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.client.ClientHttpRequestFactory;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
-
-import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4;
-
 //@Configuration
 //@ConditionalOnClass(value = {RestTemplate.class, HttpClient.class})
 public class RestTemplateConfig {
 
 //  @Value("${remote.maxTotalConnect:0}")
-//  private int maxTotalConnect; //Á¬½Ó³ØµÄ×î´óÁ¬½ÓÊıÄ¬ÈÏÎª0
+//  private int maxTotalConnect; //è¿æ¥æ± çš„æœ€å¤§è¿æ¥æ•°é»˜è®¤ä¸º0
 //  @Value("${remote.maxConnectPerRoute:200}")
-//  private int maxConnectPerRoute; //µ¥¸öÖ÷»úµÄ×î´óÁ¬½ÓÊı
+//  private int maxConnectPerRoute; //å•ä¸ªä¸»æœºçš„æœ€å¤§è¿æ¥æ•°
 //  @Value("${remote.connectTimeout:2000}")
-//  private int connectTimeout; //Á¬½Ó³¬Ê±Ä¬ÈÏ2s
+//  private int connectTimeout; //è¿æ¥è¶…æ—¶é»˜è®¤2s
 //  @Value("${remote.readTimeout:30000}")
-//  private int readTimeout; //¶ÁÈ¡³¬Ê±Ä¬ÈÏ30s
+//  private int readTimeout; //è¯»å–è¶…æ—¶é»˜è®¤30s
 //
-//  //´´½¨HTTP¿Í»§¶Ë¹¤³§
+//  //åˆ›å»ºHTTPå®¢æˆ·ç«¯å·¥å‚
 //  private ClientHttpRequestFactory createFactory() {
 //    if (this.maxTotalConnect <= 0) {
 //      SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
@@ -47,14 +30,14 @@ public class RestTemplateConfig {
 //    return factory;
 //  }
 //
-//  //³õÊ¼»¯RestTemplate,²¢¼ÓÈëspringµÄBean¹¤³§£¬ÓÉspringÍ³Ò»¹ÜÀí
+//  //åˆå§‹åŒ–RestTemplate,å¹¶åŠ å…¥springçš„Beanå·¥å‚ï¼Œç”±springç»Ÿä¸€ç®¡ç†
 //  @Bean
 //  @ConditionalOnMissingBean(RestTemplate.class)
 //  public RestTemplate getRestTemplate() {
 //    RestTemplate restTemplate = new RestTemplate(this.createFactory());
 //    List<HttpMessageConverter<?>> converterList = restTemplate.getMessageConverters();
 //
-//    //ÖØĞÂÉèÖÃStringHttpMessageConverter×Ö·û¼¯ÎªUTF-8£¬½â¾öÖĞÎÄÂÒÂëÎÊÌâ
+//    //é‡æ–°è®¾ç½®StringHttpMessageConverterå­—ç¬¦é›†ä¸ºUTF-8ï¼Œè§£å†³ä¸­æ–‡ä¹±ç é—®é¢˜
 //    HttpMessageConverter<?> converterTarget = null;
 //    for (HttpMessageConverter<?> item : converterList) {
 //      if (StringHttpMessageConverter.class == item.getClass()) {
@@ -67,7 +50,7 @@ public class RestTemplateConfig {
 //    }
 //    converterList.add(1, new StringHttpMessageConverter(StandardCharsets.UTF_8));
 //
-//    //¼ÓÈëFastJson×ª»»Æ÷
+//    //åŠ å…¥FastJsonè½¬æ¢å™¨
 //    converterList.add(new FastJsonHttpMessageConverter4());
 //    return restTemplate;
 //  }

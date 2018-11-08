@@ -6,8 +6,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.annotation.Rollback;
 
-import com.lin.server.service.JingTuiTuiService;
-
 public class JingTuiTuiTest{
 //	@Autowired //×Ô¶¯×¢Èë
 //	private JingTuiTuiService jingTuiTuiService;
